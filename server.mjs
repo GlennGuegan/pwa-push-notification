@@ -37,6 +37,18 @@ app.post("/subscribe", async (req, res) => {
   }
 })
 
+app.post("/unsubscribe", async (req, res) => {
+  const subscription = req.body
+
+  try {
+    const data = await webPush.sendNotification(subscription, payload)
+    res.status(201).json({ data })
+  } catch (error) {
+    console.log({ error })
+    res.status(400).json({ error })
+  }
+})
+
 app.post("/notify-me", async (req, res) => {
   const { subscription } = req.body
   const notification = {

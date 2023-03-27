@@ -50,7 +50,7 @@ subscribeButton.addEventListener("click", async (event) => {
   } else {
     const subscription = await swRegistration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: VAPID_PUBLIC_KEY,
+      applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
     })
     await fetch("/subscribe", {
       method: "POST",
@@ -118,4 +118,19 @@ async function registerServiceWorker() {
   //   userVisibleOnly: true,
   //   applicationServerKey: VAPID_PUBLIC_KEY,
   // })
+}
+
+function urlBase64ToUint8Array(base64String) {
+  var padding = "=".repeat((4 - (base64String.length % 4)) % 4)
+  var base64 = (base64String + padding)
+    .replace(/\-/g, "+")
+    .replace(/_/g, "/")
+
+  var rawData = window.atob(base64)
+  var outputArray = new Uint8Array(rawData.length)
+
+  for (var i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i)
+  }
+  return outputArray
 }
