@@ -1,0 +1,29 @@
+{
+  "name": "Test PWA",
+  "short_name": "Test",
+  "theme_color": "#44bcb3",
+  "background_color": "#f1f4f4",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icons_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "dir": "ltr",
+  "lang": "fr",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "browser"
+  ]
+}
