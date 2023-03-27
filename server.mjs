@@ -37,6 +37,20 @@ app.post("/subscribe", async (req, res) => {
   }
 })
 
+app.post("/notify-me", async (req, res) => {
+  const { subscription } = req.body
+  const notification = {
+    title: "Hello Boy",
+    body: "I notife you",
+  }
+
+  await webPush.sendNotification(
+    subscription,
+    JSON.stringify(notification)
+  )
+  res.status(200).send()
+})
+
 const port = process.env.PORT
 
 app.listen(port, () => {
