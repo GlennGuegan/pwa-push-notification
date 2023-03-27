@@ -2,10 +2,6 @@ const VAPID_PUBLIC_KEY =
   "BKSIQInNLkapJJqXtKu_mlKpDrdHNoX7Oyr6oVRi5doFqGEhtUEGRf_PsqKp5GKOzsHlk9vq5O6eJEXUHHUZEJI"
 
 async function registerServiceWorker() {
-  navigator.serviceWorker.register("./sw.js", {
-    scope: "/",
-  })
-
   navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
     const options = {
       userVisibleOnly: true,
@@ -47,5 +43,22 @@ async function registerServiceWorker() {
 }
 
 if ("serviceWorker" in navigator) {
-  registerServiceWorker().catch(console.log)
+  navigator.serviceWorker
+    .register("./sw.js", {
+      scope: ".", // <--- THIS BIT IS REQUIRED
+    })
+    .then(
+      function (registration) {
+        // Registration was successful
+        console.log(
+          "ServiceWorker registration successful with scope: ",
+          registration.scope
+        )
+        registerServiceWorker()
+      },
+      function (err) {
+        // registration failed :(
+        console.log("ServiceWorker registration failed: ", err)
+      }
+    )
 }
