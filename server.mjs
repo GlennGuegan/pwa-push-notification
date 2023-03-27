@@ -37,9 +37,8 @@ app.post("/subscribe", async (req, res) => {
   }
 })
 
-const port = 3000
-const hostname = "localhost"
+const port = process.env.PORT
 
-app.listen(port, hostname, () => {
+app.listen(port, () => {
   console.log(`Server start on port ${port}`)
 })
